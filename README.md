@@ -1,6 +1,6 @@
-**##Discord Bot**
+Discord Bot
 
-###Features:
+Features:
 Kick
 Ban
 Unban
