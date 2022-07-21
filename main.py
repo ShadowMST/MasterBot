@@ -1,5 +1,6 @@
 import os
 import discord
+import json
 from discord.ext import commands
 
 
@@ -53,8 +54,6 @@ async def unban(ctx, *, member):
             await ctx.guild.unban(user)
             await ctx.send(f'Unbanned {user.mention}')
             return
-
-
 
 
 
