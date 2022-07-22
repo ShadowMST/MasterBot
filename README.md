@@ -1,10 +1,11 @@
 Discord Bot
 
 Features:
-!Kick           - to kick the person specified from the Discord Server!
-!Ban            - to ban the person specified from the Discord Server!
-!Unban          - to unban the person specified from the Discord Server!
-!Clear          - to clear the chat with the specified number of messages to clear! (eg= !clear 10, which will clear 9 messages including the !clear 10 message)
+!kick           - to kick the person specified from the Discord Server!
+!ban            - to ban the person specified from the Discord Server!
+!unban          - to unban the person specified from the Discord Server!
+!softban        - to ban the person for a specified amount of time and then the ban gets reversed!
+!clear          - to clear the chat with the specified number of messages to clear! (eg= !clear 10, which will clear 9 messages including the !clear 10 message)
 (Command Error) - to provide an answer when command is typed wrongly!
 
 I have also added the Music Feature to the Bot which includes:
