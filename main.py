@@ -3,6 +3,7 @@ import discord
 import youtube_dl
 import ffmpeg
 import music
+import asyncio
 from discord.ext import commands
 
 
@@ -55,10 +56,19 @@ async def unban(ctx, *, member):
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
             await ctx.send(f'Unbanned {user.mention}')
+            await member.send(member.name + "has been unbanned from the Community!")
             return
 
 
+#The below code Softbans a Person for a Certain Amount of Time.
+@bot.command()
+async def softban(ctx, user:discord.User, duration: int):
+    await ctx.guild.ban(user)
+    await asyncio.sleep(duration)
+    await ctx.guild.unban(user)
 
+
+          
 #------------------------------------------------Music Bot-------------------------------------------
 cogs = [music]
 
