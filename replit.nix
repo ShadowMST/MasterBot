@@ -1,5 +1,6 @@
 { pkgs }: {
   deps = [
+    pkgs.ffmpeg
     pkgs.python38Full
   ];
   env = {

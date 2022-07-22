@@ -10,6 +10,7 @@ numpy = "^1.22.2"
 replit = "^3.2.4"
 discord = "^1.7.3"
 youtube_dl = "^2021.12.17"
+ffmpeg = "^1.4"
 
 [tool.poetry.dev-dependencies]
 
