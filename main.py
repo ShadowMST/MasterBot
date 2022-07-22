@@ -65,9 +65,23 @@ cogs = [music]
 for i in range(len(cogs)):
   cogs[i].setup(bot)
 
-#----------------------------------------------------------------------------------------------------
+#-------------------------------------------------Poll Bot------------------------------------------
 
-
+#create a yes/no poll
+@bot.command()
+#the content will contain the question, which must be answerable with yes or no in order to make sense
+async def poll(ctx, *, content:str):
+  print("Creating yes/no poll...")
+  #create the embed file
+  embed=discord.Embed(title=f"{content}", description="React to this message with ✅ for yes, ❌ for no.",  color=0xd10a07)
+  #set the author and icon
+  embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url) 
+  print("Embed created")
+  #send the embed 
+  message = await ctx.channel.send(embed=embed)
+  #add the reactions
+  await message.add_reaction("✅")
+  await message.add_reaction("❌")
 
 
 
