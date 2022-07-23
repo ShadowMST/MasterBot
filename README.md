@@ -28,3 +28,7 @@ MasterBot is a feature-rich discord bot with new features constantly being updat
 * Special thanks to [@TryMe](https://github.com/itstryme) for help!
 * Feel free to [Fork](https://github.com/ShadowMST/MasterBot/fork) this repository, create a feature branch and submit a pull request
 * You can check all the planned features [here](https://github.com/ShadowMST/MasterBot/projects?type=new) or make a request for one at our discord
+
+
+PS: I have made this bot on replit: https://replit.com/@ShadowMaster7?username=ShadowMaster7
+And since Replit dosen't support FFMPEG anymore I have used the Following Workaround where all I did was go to the project, then go to packages and search for ffmpeg then install it. After that, go to Files, click the three dot button and show hidden files. You'll see replit.nix file, open it and you'll see a list named deps. Add pkgs.ffmpeg to that list and the bot will work!
