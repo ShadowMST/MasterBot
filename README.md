@@ -7,7 +7,7 @@
 >
 > Support Server: [Join Here](https://discord.gg/JajprzG94F)
 >
-> Commands URL: [Visit Here]([https://github.com/ShadowMST/MasterBot/blob/main/README.md](https://github.com/ShadowMST/MasterBot/wiki/📜-Full-Command-Reference)
+> Commands URL: [Visit Here](https://github.com/ShadowMST/MasterBot/wiki/📜-Full-Command-Reference)
 
 
 ### Features
