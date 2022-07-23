@@ -161,8 +161,13 @@ async def userinfo(ctx, *, user: discord.Member = None):
     return await ctx.send(embed=embed)
 
 
-
-
+#Creating and Sending Invite Link
+@bot.command(name='invite',pass_context=True)
+async def invite(ctx, *argument):
+    invitelink = ("https://discord.com/oauth2/authorize?client_id=999521375863713892&permissions=8&scope=bot")
+    #dming it to the person
+    await ctx.author.send("Here is the link to invite me to your server:\n")
+    await ctx.author.send(invitelink)
 
 
 
