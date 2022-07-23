@@ -1,15 +1,14 @@
 import os
 import discord
-import youtube_dl
-import ffmpeg
 import music
 import asyncio
+import keep_alive
 from discord.ext import commands
 
 
 bot = commands.Bot(command_prefix="!", intents = discord.Intents.all())
 
-#----------------------BOT COMMANDS------------------------------------------------------------
+#----------------------MODERATION COMMANDS--------------------------------------------
 
 
 #This code will clear messages!
@@ -75,25 +74,91 @@ cogs = [music]
 for i in range(len(cogs)):
   cogs[i].setup(bot)
 
-#-------------------------------------------------Poll Bot------------------------------------------
+#--------------------NORMAL COMMANDS---------------------------------------------
 
-#create a yes/no poll
+#Creates a Two Option Yes or No Poll
 @bot.command()
-#the content will contain the question, which must be answerable with yes or no in order to make sense
 async def poll(ctx, *, content:str):
   print("Creating yes/no poll...")
-  #create the embed file
   embed=discord.Embed(title=f"{content}", description="React to this message with ✅ for yes, ❌ for no.",  color=0xd10a07)
-  #set the author and icon
   embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url) 
   print("Embed created")
-  #send the embed 
   message = await ctx.channel.send(embed=embed)
-  #add the reactions
   await message.add_reaction("✅")
   await message.add_reaction("❌")
 
 
+#Ping Commands which gives the Latency of the Bot
+@bot.command()
+async def ping(ctx):
+    '''
+    This text will be shown in the help command
+    '''
+
+    
+    latency = bot.latency
+    await ctx.send(f'The ping of the bot is:')
+    await ctx.send(latency)
+
+
+
+
+#Mentions the ServerInformation
+@bot.command(help = "Prints details of Server")
+async def where_am_i(ctx):
+    owner=str(ctx.guild.owner)
+    region = str(ctx.guild.region)
+    guild_id = str(ctx.guild.id)
+    memberCount = str(ctx.guild.member_count)
+    icon = str(ctx.guild.icon_url)
+    desc=ctx.guild.description
+    
+    embed = discord.Embed(
+        title=ctx.guild.name + " Server Information",
+        description=desc,
+        color=discord.Color.blue()
+    )
+    embed.set_thumbnail(url=icon)
+    embed.add_field(name="Owner", value=owner, inline=True)
+    embed.add_field(name="Server ID", value=guild_id, inline=True)
+    embed.add_field(name="Region", value=region, inline=True)
+    embed.add_field(name="Member Count", value=memberCount, inline=True)
+
+    await ctx.send(embed=embed)
+
+    members=[]
+    async for member in ctx.guild.fetch_members(limit=150) :
+        await ctx.send('Name : {}\t Status : {}\n Joined at {}'.format(member.display_name,str(member.status),str(member.joined_at)))
+
+@bot.command()
+async def tell_me_about_yourself(ctx):
+    text = "My name is MasterBot!\n I was built by MST :)"
+    await ctx.send(text)
+
+
+
+#Mentions the User Information
+@bot.command()
+async def userinfo(ctx, *, user: discord.Member = None):
+    if isinstance(ctx.channel, discord.DMChannel):
+      return
+    if user is None:
+      user = ctx.author      
+    date_format = "%a, %d %b %Y %I:%M %p"
+    embed = discord.Embed(color=0xdfa3ff, description=user.mention)
+    embed.set_author(name=str(user), icon_url=user.avatar_url)
+    embed.set_thumbnail(url=user.avatar_url)
+    embed.add_field(name="Joined", value=user.joined_at.strftime(date_format))
+    members = sorted(ctx.guild.members, key=lambda m: m.joined_at)
+    embed.add_field(name="Join position", value=str(members.index(user)+1))
+    embed.add_field(name="Registered", value=user.created_at.strftime(date_format))
+    if len(user.roles) > 1:
+        role_string = ' '.join([r.mention for r in user.roles][1:])
+        embed.add_field(name="Roles [{}]".format(len(user.roles)-1), value=role_string, inline=False)
+    perm_string = ', '.join([str(p[0]).replace("_", " ").title() for p in user.guild_permissions if p[1]])
+    embed.add_field(name="Guild permissions", value=perm_string, inline=False)
+    embed.set_footer(text='ID: ' + str(user.id))
+    return await ctx.send(embed=embed)
 
 
 
@@ -114,5 +179,24 @@ async def poll(ctx, *, content:str):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+keep_alive.keep_alive()
 my_secret = os.environ['token']
 bot.run(my_secret)
